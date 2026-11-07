@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pinanek.github.io/sitemap.xml
+Sitemap: https://pinanek.me/sitemap.xml

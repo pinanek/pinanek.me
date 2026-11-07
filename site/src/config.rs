@@ -42,6 +42,6 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| Config {
         description: "Personal website and digital garden.",
         author: "Ngo Duc Hoang Son",
         author_username: "pinanek",
-        url: "https://pinanek.github.io",
+        url: "https://pinanek.me",
     },
 });
