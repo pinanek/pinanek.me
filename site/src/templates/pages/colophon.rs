@@ -1,13 +1,13 @@
 use std::fs;
 
 use anyhow::Result;
+use comfit::Highlighter;
 use maud::{PreEscaped, html};
 use serde::{Deserialize, Serialize};
 
 use crate::{
     assets::image::ImageRequests,
     config::CONFIG,
-    highlight::HighlightRegistry,
     markdown::render_markdown,
     templates::{
         layouts::main_layout,
@@ -29,7 +29,7 @@ pub struct ColophonPage<'a> {
 }
 
 impl<'a> ColophonPage<'a> {
-    pub fn new(languages: &HighlightRegistry) -> Result<Self> {
+    pub fn new(languages: &Highlighter) -> Result<Self> {
         let route = "/colophon/";
 
         let content_dir = CONFIG.content_dir.join("colophon");

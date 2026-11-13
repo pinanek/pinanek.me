@@ -9,7 +9,7 @@ html,
 }
 
 html:hover:not(:has(body:hover)),
-.scrollable:hover:not(:has(> .scrollable-content:hover)) {
+.scrollable:hover:not(:has(> code:hover)) {
   scrollbar-color: var(--c-scrollbar-thumb-hover) var(--c-scrollbar-track);
 }
 
@@ -17,7 +17,7 @@ html:hover:not(:has(body:hover)),
   overflow: auto;
 }
 
-.scrollable-content {
+.scrollable > code {
   min-inline-size: 100%;
   min-block-size: 100%;
 }

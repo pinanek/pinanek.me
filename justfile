@@ -20,9 +20,3 @@ serve:
 
 clean:
     rm -rf .cache dist
-
-pull-queries:
-    cargo xtask query pull
-
-update-queries:
-    cargo xtask query update

@@ -11,9 +11,9 @@ There’s no framework here. My [Rust](https://rust-lang.org/) generator reads M
 
 I use [maud](https://github.com/lambda-fairy/maud) for HTML templates and [comrak](https://comrak.ee/) for Markdown. On the Node.js side, [Rolldown](https://rolldown.rs/) builds the browser scripts and [Lightning CSS](https://lightningcss.dev/) handles the stylesheets.
 
-Code highlighting comes from [Tree-sitter](https://tree-sitter.github.io/tree-sitter/), the parser you might know from editors like [Neovim](https://neovim.io/) and [Helix](https://helix-editor.com/). The [image](https://github.com/image-rs/image) crate handles image processing.
+Code highlighting comes from [Comfit](https://github.com/pinanek/comfit), which bundles Tree-sitter grammars and queries. The [image](https://github.com/image-rs/image) crate handles image processing.
 
-The Rust code is split into a `site` crate for the generator and an `xtask` crate for maintaining syntax queries. Both use the manifest types in `site_internal`. GitHub Actions takes care of building the site and deploying it to GitHub Pages.
+The Rust generator lives in the `site` crate. GitHub Actions takes care of building the site and deploying it to GitHub Pages.
 
 Each post gets a directory under `content/posts/`, with a `main.md` file and its images together. At the top of the file, TOML front matter holds the title, description, dates, and tags. Pages like this one and Uses are Markdown too. Publications come from a TOML data file.
 
@@ -122,13 +122,9 @@ For formatting, I use [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html). I
 
 ## Syntax highlighting
 
-I like how Helix highlights code, so I use its [queries](https://github.com/helix-editor/helix/tree/master/runtime/queries) for most languages.
+[Comfit](https://github.com/pinanek/comfit) provides the Tree-sitter grammars, queries, and HTML renderer. I enable the languages the site needs through Cargo features, including helper languages for embedded content such as regular expressions and JSDoc.
 
-I pin those queries to specific versions so the highlighting doesn’t change between builds. A small build tool downloads them and combines the shared rules. Updating to a newer version is a separate step.
-
-When I compile the site, `site/build.rs` generates the language enum and getters, collects the highlight names, and embeds the queries with `include_str!`. At startup, the generator compiles the Tree-sitter queries in parallel and shares the configurations across Markdown renderers. The queries are already embedded, so it doesn’t need to read query files while generating pages.
-
-I adapted the highlighter from Tree-sitter’s Rust implementation and added a custom HTML renderer. It can handle one language inside another, like JavaScript inside HTML. For rainbow brackets, it uses the query’s scope information to cycle through six colors. Matching delimiters get the same color, while brackets in strings and comments don’t count as nesting.
+Markdown renderers share a highlighter, and each code block gets its own document with shared compiled queries. Comfit handles embedded languages and rainbow brackets. The renderer cycles bracket colors through six site palette colors, while CSS handles token styles and line numbers.
 
 The code blocks above use this setup. Their highlighting is already in the HTML, so your browser doesn’t need to parse the snippets or run a highlighting library. If the renderer doesn’t recognize a fence’s language, it escapes the code and shows it as plain text.
 

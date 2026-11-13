@@ -36,8 +36,6 @@
   --c-code-error: var(--c-cpn-red);
   --c-code-variable: var(--c-cpn-text);
   --c-code-parameter: var(--c-cpn-maroon);
-  --c-code-operator: var(--c-cpn-sky);
-  --c-code-macro: var(--c-cpn-rosewater);
   --c-code-heading: var(--c-cpn-lavender);
 
   --font-sans: "Hanken Grotesk", "Hanken Grotesk fallback", system-ui;

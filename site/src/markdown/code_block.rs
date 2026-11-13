@@ -135,9 +135,7 @@ pub fn prose_code_block(
                     data-copy-code
                 { (copy_icon(Some("copy-icon"), None, None)) (check_icon(Some("check-icon"), None, None)) }
 
-                pre class="prose-code-block__pre scrollable" {
-                    code class="scrollable-content" { (PreEscaped(content)) }
-                }
+                (PreEscaped(content))
             }
         }
     }

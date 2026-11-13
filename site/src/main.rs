@@ -9,6 +9,7 @@ mod templates;
 mod utils;
 
 use anyhow::{Context, Ok, Result};
+use comfit::Highlighter;
 use std::fs;
 
 use crate::assets::html::write_html;
@@ -16,7 +17,6 @@ use crate::assets::image::write_images;
 use crate::assets::public::{copy_photos_dir, copy_public_dir};
 use crate::assets::xml::{write_rss, write_sitemap};
 use crate::config::CONFIG;
-use crate::highlight::HighlightRegistry;
 use crate::og_image::write_og_images;
 use crate::photos::get_photos;
 use crate::posts::{get_posts, get_tags};
@@ -26,7 +26,7 @@ use crate::templates::pages::{
 };
 
 fn main() -> Result<()> {
-    let languages = HighlightRegistry::new()?;
+    let languages = Highlighter::new()?;
     let posts = get_posts(&languages)?;
     let photos = get_photos()?;
 

@@ -2,14 +2,12 @@ use std::{fs, path::Path};
 
 use anyhow::{Context, Result};
 use chrono::prelude::*;
+use comfit::Highlighter;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use unicode_segmentation::UnicodeSegmentation;
 
-use crate::{
-    assets::image::ImageRequests, config::CONFIG, highlight::HighlightRegistry,
-    markdown::render_markdown,
-};
+use crate::{assets::image::ImageRequests, config::CONFIG, markdown::render_markdown};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all(deserialize = "camelCase"))]
@@ -35,7 +33,7 @@ pub struct Post {
     pub has_math: bool,
 }
 
-pub fn get_posts(languages: &HighlightRegistry) -> Result<Vec<Post>> {
+pub fn get_posts(languages: &Highlighter) -> Result<Vec<Post>> {
     let mut paths = Vec::new();
 
     for entry in fs::read_dir(&CONFIG.posts_dir).with_context(|| {
@@ -60,7 +58,7 @@ pub fn get_posts(languages: &HighlightRegistry) -> Result<Vec<Post>> {
         .collect()
 }
 
-fn parse_post(path: &Path, languages: &HighlightRegistry) -> Result<Post> {
+fn parse_post(path: &Path, languages: &Highlighter) -> Result<Post> {
     let content_dir = path
         .parent()
         .with_context(|| format!("invalid content dir: {}", path.display()))?;

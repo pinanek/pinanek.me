@@ -12,6 +12,7 @@ mod task_list;
 use std::{collections::HashMap, fmt::Write, path::Path};
 
 use anyhow::{Context, Result};
+use comfit::Highlighter;
 use comrak::{
     Arena, Node, Options,
     html::{
@@ -26,7 +27,6 @@ use serde::{Deserialize, Serialize, de::DeserializeOwned};
 
 use crate::{
     assets::image::ImageRequests,
-    highlight::HighlightRegistry,
     markdown::{
         alert::{ParsedAlert, prepare_alert, prose_alert},
         code_block::prepare_code_block,
@@ -48,7 +48,7 @@ pub enum MarkdownNodeAction {
 
 pub struct MarkdownContext<'a> {
     pub content_dir: &'a Path,
-    pub languages: &'a HighlightRegistry,
+    pub languages: &'a Highlighter,
     pub alerts: Vec<ParsedAlert<'a>>,
     pub footnote_numbers: HashMap<String, usize>,
     pub footnote_definitions: Vec<ParsedFootnoteDef<'a>>,
@@ -59,7 +59,7 @@ pub struct MarkdownContext<'a> {
 }
 
 impl<'a> MarkdownContext<'a> {
-    fn new(content_dir: &'a Path, languages: &'a HighlightRegistry, link_icons: bool) -> Self {
+    fn new(content_dir: &'a Path, languages: &'a Highlighter, link_icons: bool) -> Self {
         Self {
             content_dir,
             languages,
@@ -124,7 +124,7 @@ pub struct RenderedMarkdown<T> {
 pub fn render_markdown<T: DeserializeOwned>(
     content: &str,
     content_dir: &Path,
-    languages: &HighlightRegistry,
+    languages: &Highlighter,
 ) -> Result<RenderedMarkdown<T>> {
     let arena = Arena::new();
 
@@ -210,7 +210,7 @@ fn prepare_document<'a>(
     options: &'a Options<'a>,
     plugins: &'a Plugins,
     markdown_options: MarkdownOptions,
-    languages: &'a HighlightRegistry,
+    languages: &'a Highlighter,
 ) -> Result<(HashMap<usize, MarkdownNodeAction>, ImageRequests)> {
     let mut context = MarkdownContext::new(content_dir, languages, markdown_options.link_icons);
 

@@ -31,7 +31,7 @@
   padding-block: 0.5rem;
 }
 
-.prose-code-block .ts-line {
+.prose-code-block .line {
   display: inline-block;
   width: 100%;
   min-height: var(--line-height-default);
@@ -39,7 +39,7 @@
   box-sizing: border-box;
 }
 
-.prose-code-block .ts-line::before {
+.prose-code-block .line::before {
   counter-increment: linenumber;
   content: counter(linenumber);
   display: inline-block;
@@ -145,168 +145,260 @@
   opacity: 0;
 }
 
-.ts-line-highlighted {
+.prose-code-block .line-highlight {
   background-color: var(--c-cpn-surface0);
 }
 
-.ts-attribute,
-.ts-type {
-  color: var(--c-code-type);
+.prose-code-block :where(code > .line > span) {
+  color: var(--comfit-rainbow, var(--c-code-variable));
+  font-style: normal;
 }
 
-.ts-type-builtin,
-.ts-keyword,
-.ts-keyword-control-conditional {
-  color: var(--c-code-keyword);
-}
-
-.ts-type-enum-variant,
-.ts-constant-character,
-.ts-markup-list,
-.ts-hint {
-  color: var(--c-code-property);
-}
-
-.ts-constructor,
-.ts-label,
-.ts-markup-link-label {
-  color: var(--c-code-label);
-}
-
-.ts-constant {
-  color: var(--c-code-constant);
-}
-
-.ts-constant-character-escape,
-.ts-string-regexp,
-.ts-markup-quote {
-  color: var(--c-code-escape);
-}
-
-.ts-string,
-.ts-markup-raw,
-.ts-markup-list-checked,
-.ts-diff-plus {
-  color: var(--c-code-string);
-}
-
-.ts-string-special,
-.ts-variable-other-member,
-.ts-function,
-.ts-tag,
-.ts-special,
-.ts-markup-link-url,
-.ts-diff-delta {
-  color: var(--c-code-function);
-}
-
-.ts-string-special-symbol,
-.ts-variable-builtin,
-.ts-markup-heading-1,
-.ts-markup-bold,
-.ts-markup-italic,
-.ts-diff-minus,
-.ts-error {
-  color: var(--c-code-error);
-}
-
-.ts-comment,
-.ts-punctuation,
-.ts-markup-list-unchecked {
-  color: var(--c-code-comment);
-}
-
-.ts-comment {
+.prose-code-block .attribute {
+  color: var(--comfit-rainbow, var(--c-code-constant));
   font-style: italic;
 }
 
-.ts-variable {
-  color: var(--c-code-variable);
+.prose-code-block .boolean,
+.prose-code-block .constant,
+.prose-code-block .number {
+  color: var(--comfit-rainbow, var(--c-code-constant));
 }
 
-.ts-variable-parameter {
-  color: var(--c-code-parameter);
+.prose-code-block .character,
+.prose-code-block .string {
+  color: var(--comfit-rainbow, var(--c-code-string));
+}
+
+.prose-code-block .comment {
+  color: var(--comfit-rainbow, var(--c-code-comment));
   font-style: italic;
 }
 
-.ts-punctuation-special,
-.ts-operator,
-.ts-info {
-  color: var(--c-code-operator);
-}
-
-.ts-keyword-control-conditional {
+.prose-code-block .constructor,
+.prose-code-block .type {
+  color: var(--comfit-rainbow, var(--c-code-type));
   font-style: italic;
 }
 
-.ts-function-macro {
-  color: var(--c-code-macro);
-}
-
-.ts-namespace {
-  color: var(--c-code-type);
+.prose-code-block .function {
+  color: var(--comfit-rainbow, var(--c-code-function));
   font-style: italic;
 }
 
-.ts-markup-heading-2 {
-  color: var(--c-code-constant);
+.prose-code-block .keyword {
+  color: var(--comfit-rainbow, var(--c-code-keyword));
 }
 
-.ts-markup-heading-3,
-.ts-warning {
-  color: var(--c-code-type);
+.prose-code-block .module {
+  color: var(--comfit-rainbow, var(--c-code-type));
 }
 
-.ts-markup-heading-4 {
-  color: var(--c-code-string);
+.prose-code-block .operator {
+  color: var(--comfit-rainbow, var(--c-code-property));
 }
 
-.ts-markup-heading-5 {
-  color: var(--c-code-label);
+.prose-code-block .property,
+.prose-code-block .tag {
+  color: var(--comfit-rainbow, var(--c-code-function));
 }
 
-.ts-markup-heading-6,
-.ts-markup-link-text {
-  color: var(--c-code-heading);
+.prose-code-block .variable {
+  color: var(--comfit-rainbow, var(--c-code-variable));
 }
 
-.ts-markup-bold {
-  font-weight: 700;
+.prose-code-block .attribute-builtin,
+.prose-code-block .keyword-directive,
+.prose-code-block .tag-attribute {
+  color: var(--comfit-rainbow, var(--c-code-type));
+  font-style: normal;
 }
 
-.ts-markup-italic {
+.prose-code-block .comment-documentation,
+.prose-code-block .comment-error,
+.prose-code-block .comment-note,
+.prose-code-block .comment-todo,
+.prose-code-block .comment-warning {
+  color: var(--comfit-rainbow, var(--c-code-comment));
   font-style: italic;
 }
 
-.ts-markup-strikethrough {
+.prose-code-block .constant-builtin,
+.prose-code-block .diff-minus,
+.prose-code-block .variable-builtin {
+  color: var(--comfit-rainbow, var(--c-code-error));
+  font-style: normal;
+}
+
+.prose-code-block .constant-macro,
+.prose-code-block .diff-delta,
+.prose-code-block .number-float {
+  color: var(--comfit-rainbow, var(--c-code-constant));
+  font-style: normal;
+}
+
+.prose-code-block .diff-plus,
+.prose-code-block .markup-raw,
+.prose-code-block .string-documentation,
+.prose-code-block .string-regexp,
+.prose-code-block .string-special {
+  color: var(--comfit-rainbow, var(--c-code-string));
+  font-style: normal;
+}
+
+.prose-code-block .function-builtin,
+.prose-code-block .markup-italic {
+  color: var(--comfit-rainbow, var(--c-code-error));
+  font-style: italic;
+}
+
+.prose-code-block .function-call,
+.prose-code-block .function-macro,
+.prose-code-block .function-method {
+  color: var(--comfit-rainbow, var(--c-code-function));
+  font-style: italic;
+}
+
+.prose-code-block .keyword-conditional,
+.prose-code-block .keyword-coroutine,
+.prose-code-block .keyword-debug,
+.prose-code-block .keyword-exception,
+.prose-code-block .keyword-function,
+.prose-code-block .keyword-import,
+.prose-code-block .keyword-modifier,
+.prose-code-block .keyword-operator,
+.prose-code-block .keyword-repeat,
+.prose-code-block .keyword-return,
+.prose-code-block .keyword-type,
+.prose-code-block .type-builtin {
+  color: var(--comfit-rainbow, var(--c-code-keyword));
+  font-style: normal;
+}
+
+.prose-code-block .markup-link {
+  color: var(--comfit-rainbow, var(--c-code-heading));
+  font-style: normal;
+}
+
+.prose-code-block .markup-list,
+.prose-code-block .punctuation-delimiter,
+.prose-code-block .tag-delimiter {
+  color: var(--comfit-rainbow, var(--c-code-property));
+  font-style: normal;
+}
+
+.prose-code-block .markup-quote,
+.prose-code-block .string-escape {
+  color: var(--comfit-rainbow, var(--c-code-escape));
+  font-style: normal;
+}
+
+.prose-code-block .markup-strikethrough {
+  color: var(--comfit-rainbow, var(--c-text-subtle));
+  font-style: normal;
   text-decoration-line: line-through;
 }
 
-.ts-markup-link-url {
+.prose-code-block .markup-strong {
+  color: var(--comfit-rainbow, var(--c-code-error));
+  font-style: normal;
+  font-weight: bold;
+}
+
+.prose-code-block .punctuation-bracket,
+.prose-code-block .punctuation-special {
+  color: var(--comfit-rainbow, var(--c-code-comment));
+  font-style: normal;
+}
+
+.prose-code-block .tag-builtin {
+  color: var(--comfit-rainbow, var(--c-code-function));
+  font-style: normal;
+}
+
+.prose-code-block .type-definition {
+  color: var(--comfit-rainbow, var(--c-code-type));
   font-style: italic;
-  text-decoration-line: underline;
 }
 
-.ts-rainbow-1 {
-  color: var(--c-cpn-red);
+.prose-code-block .variable-member {
+  color: var(--comfit-rainbow, var(--c-code-variable));
+  font-style: normal;
 }
 
-.ts-rainbow-2 {
-  color: var(--c-cpn-peach);
+.prose-code-block .variable-parameter {
+  color: var(--comfit-rainbow, var(--c-code-parameter));
+  font-style: italic;
 }
 
-.ts-rainbow-3 {
-  color: var(--c-cpn-yellow);
+.prose-code-block .function-method-call {
+  color: var(--comfit-rainbow, var(--c-code-function));
+  font-style: italic;
 }
 
-.ts-rainbow-4 {
-  color: var(--c-cpn-green);
+.prose-code-block .markup-heading-1 {
+  color: var(--comfit-rainbow, var(--c-code-error));
+  font-style: normal;
 }
 
-.ts-rainbow-5 {
-  color: var(--c-cpn-blue);
+.prose-code-block .markup-heading-2 {
+  color: var(--comfit-rainbow, var(--c-code-constant));
+  font-style: normal;
 }
 
-.ts-rainbow-6 {
-  color: var(--c-cpn-mauve);
+.prose-code-block .markup-heading-3 {
+  color: var(--comfit-rainbow, var(--c-code-type));
+  font-style: normal;
+}
+
+.prose-code-block .markup-heading-4,
+.prose-code-block .markup-raw-block {
+  color: var(--comfit-rainbow, var(--c-code-string));
+  font-style: normal;
+}
+
+.prose-code-block .markup-heading-5 {
+  color: var(--comfit-rainbow, var(--c-code-label));
+  font-style: normal;
+}
+
+.prose-code-block .markup-heading-6,
+.prose-code-block .markup-link-label {
+  color: var(--comfit-rainbow, var(--c-code-heading));
+  font-style: normal;
+}
+
+.prose-code-block .markup-link-url,
+.prose-code-block .string-special-url {
+  color: var(--comfit-rainbow, var(--c-code-function));
+  font-style: normal;
+}
+
+.prose-code-block .variable-parameter-builtin {
+  color: var(--comfit-rainbow, var(--c-code-parameter));
+  font-style: italic;
+}
+
+.prose-code-block .rainbow-0 {
+  --comfit-rainbow: var(--c-cpn-red);
+}
+
+.prose-code-block .rainbow-1 {
+  --comfit-rainbow: var(--c-cpn-peach);
+}
+
+.prose-code-block .rainbow-2 {
+  --comfit-rainbow: var(--c-cpn-yellow);
+}
+
+.prose-code-block .rainbow-3 {
+  --comfit-rainbow: var(--c-cpn-green);
+}
+
+.prose-code-block .rainbow-4 {
+  --comfit-rainbow: var(--c-cpn-blue);
+}
+
+.prose-code-block .rainbow-5 {
+  --comfit-rainbow: var(--c-cpn-mauve);
 }
